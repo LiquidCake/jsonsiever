@@ -1,5 +1,8 @@
 plugins {
     id 'java-library'
+
+    id 'maven-publish'
+    id 'org.jreleaser' version '1.13.1'
 }
 
 group = 'io.github.liquidcake'
@@ -40,5 +43,69 @@ tasks.named('jar') {
     manifest {
         attributes('Implementation-Title': project.name,
                 'Implementation-Version': project.version)
+    }
+}
+
+// publishing to Maven Central using Jreleaser (https://jreleaser.org/guide/latest/examples/maven/maven-central.html)
+
+publishing {
+    publications {
+        maven(MavenPublication) {
+            groupId = 'io.github.liquidcake'
+            artifactId = 'jsonsiever'
+
+            from components.java
+
+            pom {
+                name = 'Jsonsiever'
+                description = 'Json filtering library for Java/Spring'
+                url = 'https://github.com/LiquidCake/jsonsiever'
+                inceptionYear = '2024'
+                licenses {
+                    license {
+                        name = 'MIT License'
+                        url = 'http://www.opensource.org/licenses/mit-license.php'
+                    }
+                }
+                developers {
+                    developer {
+                        id = 'liquidcake'
+                        name = 'Arseniy'
+                    }
+                }
+                scm {
+                    connection = 'scm:git:https://github.com/liquidcake/jsonsiever.git'
+                    developerConnection = 'scm:git:ssh://github.com/liquidcake/jsonsiever.git'
+                    url = 'https://github.com/liquidcake/jsonsiever'
+                }
+            }
+        }
+    }
+
+    repositories {
+        maven {
+            url = layout.buildDirectory.dir('staging-deploy')
+        }
+    }
+}
+
+jreleaser {
+    signing {
+        active = 'ALWAYS'
+        armored = true
+    }
+    deploy {
+        maven {
+            nexus2 {
+                'maven-central' {
+                    active = 'ALWAYS'
+                    url = 'https://s01.oss.sonatype.org/service/local'
+                    snapshotUrl = 'https://s01.oss.sonatype.org/content/repositories/snapshots/'
+                    closeRepository = true
+                    releaseRepository = false
+                    stagingRepository('build/staging-deploy')
+                }
+            }
+        }
     }
 }
