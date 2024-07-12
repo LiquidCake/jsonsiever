@@ -2,7 +2,7 @@ plugins {
     id 'java-library'
 }
 
-group = 'jsonsiever'
+group = 'com.github.liquidcake'
 version = '1.0.0'
 
 java {
