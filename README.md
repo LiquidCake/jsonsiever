@@ -1,8 +1,8 @@
 # jsonsiever
-Dynamic Json filtering library for Java/Spring  
+Dynamic Json filtering library for Java/Spring REST APIs 
 This lib will be useful in a situation when we want to filter (potentially large and complex) json object using kind of WYSIWYG filtering pattern.  
 
-E.g. we have following json and want to remove `agi` field:
+E.g. we have following json and want to remove `stats.agi` field:
 ```
 {
   "name": "orange",
@@ -21,28 +21,29 @@ Then filter would be like this:
   }
 }
 ```
-Removing `name` may look like this:
+Removing `name` while keeping `stats` object intact will look like this:
 ```
 {
   "stats": {}
 }
 ```
+(more examples in javadoc of `JsonFilteringService`)
 
 ## Main use-case:
-Lets assume there is a Spring API with some heavy endpoint and we want to remove particular deeply-nested fields from the response, to make it lighter and more easily parsible.
-Sometimes we can change our response structure, prevent population of some fields etc. But this is not always an option.
-Another possible solution would be to wrap our endpoint in a GraphQL query and let user chose necessary fields for each request. But this approach also has its downsides.  
+Let's assume we have a Spring REST API with some heavy endpoint, and we want to remove particular deeply-nested fields from the response, to make it lighter and more easily parsable for clients.
+Sometimes we can change our response structure, prevent population of some fields etc. But this is not always an option.  
+Another possible solution would be to wrap our endpoint in a GraphQL query and let user chose desired fields for each request. But this approach also has its downsides.  
 
-This library is meant to be "easy to plug in" configurable alternative that allows both static (based on pre-defined filter files) and dynamic (based on user-passed header) filtering of Spring REST api response.
-For the same endpoint, we can set different filters per-clientId and use regular sync and async endpoints. 
+This library is meant to be an "easy to plug in" configurable alternative that allows both static (based on pre-defined file-based filter) and dynamic (based on user-passed header) filtering of json response for Spring HTTP endpoints.
+It supports setting different filters per-clientId for the same endpoint and usage of both regular sync and async endpoints. 
 
-Offcourse filtering completed json response is not as resource-efficient as just not serializing unwanted fields, but Jsonsiever is based on fast Jackson Streaming API and resource usage drawback should be generally acceptible.  
+Of course, filtering a complete json response is not as resource-efficient as just not serializing unwanted fields at the first place, but Jsonsiever is based on fast Jackson Streaming API and resource usage drawback should be generally acceptable.  
 
-Lib is ready to use by just plugging it into Spring 3.X / Java 17 application. Also, its code might be relatively easily adapted to Spring 2.X / Java 8. 
-It is also possible to plug lib into non-Spring or even entirely non-web application (see below [How to plug Jsonsiever lib into any (Java 17) application](#How-to-plug-Jsonsiever-lib-into-any-(Java-17)-application)) and just use core `JsonFilteringService` class to filter json in other scenarions, besides processing REST responses. This class (as well as whole `jsonsiever.core` package it depends on) is also ready to be compiled with Java 8.
+Lib is ready to use by just plugging it into SpringBoot 3.X / Java 17 application. Also, its code might be relatively easily adapted to SpringBoot 2.X / Java 8 or plain Spring / Java Servlet app.  
+It is also possible to plug the lib into plain Java 17 application and use it for manual json filtering (see below [How to plug Jsonsiever lib into any (Java 17) application](#How-to-plug-Jsonsiever-lib-into-any-(Java-17)-application)). In this case one would just use core `JsonFilteringService` class to filter json in other scenarios, besides processing REST responses. This class (as well as whole `jsonsiever.core` package it is part of) is ready to be compiled with Java 8.
 
-## How to plug Jsonsiever lib into Spring 3.X application
-There is a simple demo Spring application inside this repository - feel free to build it and play around - `jsonsiever/demo_app_spring`  
+## How to plug Jsonsiever lib into SpringBoot 3.X application
+There is a simple demo SpringBoot application inside this repository - feel free to build it and play around - `jsonsiever/demo_app_spring`  
 
 #### Step 1: Adjust your Spring configuration
 ```
@@ -77,7 +78,7 @@ public class AppConfig {
 ```
 
 #### Step 2: create filtering settings file
-Create file `json-filtering-settings.yml` inside classpath (e.g. `resources` folder) and configure your endpoints (see javadoc for `JsonFilteringSettings`)
+Create file `json-filtering-settings.yml` inside classpath (e.g. `resources` folder) and configure your endpoints (details in javadoc for `JsonFilteringSettings`)  
 Example from `demo_app_spring`:
 ```
 filterHeaderName: "X-json-filter-pattern"
@@ -101,9 +102,9 @@ endpoints:
 
 #### Step 3: add filter files for your endpoints (if you are going to use file-based filters)
 Create dir `json-filters` inside classpath (e.g. `resources` folder) and inside it - directories for each configured endpoint.  
-Indide each per-endpoint directory you may have 1 or more per-client filter files.  
-E.g. in abov example config - we have 2 endpoints, each with defautlt filter and with separate filter for client-id `our-mobile-app` which can be passed by client in HTTP header.  
-Example from `demo_app_spring` goes as following structure:
+Inside each per-endpoint directory you may have 1 or more per-client filter files.  
+E.g. in above example config - we have 2 endpoints, each with default filter and with separate filter for client-id `our-mobile-app` which can be passed by client in HTTP header.  
+Example from `demo_app_spring` has the following structure:
 ```
 json-filters/
   GET_get-cats/
@@ -123,17 +124,17 @@ Simple example from `demo_app_spring` file `demo_app_spring/src/main/resources/j
   }
 }
 ```
-(this filters out `str` field that otherwise would be present in response)  
+(this filters out `stats.str` field that otherwise would be present in response)  
 
 ### Usage
-After above configuration, requests to configured endpoints will be filtered. Since we have both header-based and file-based filtering enabled, priority will be following:
+After making above configuration - requests to configured endpoints will be filtered. Since we have both header-based and file-based filtering enabled, priority will be following:
 1. if user provides `X-json-filter-pattern` header with valid filter pattern json - this filter is applied.
-2. else, if user provides `X-client-id` header with value we created filters for (`our-mobile-app`) - client-specific filter is applied.
-3. else - default client filter file will be used.
-4. in case we didnt have nor header value neither any of filter files present for this endpoint, or in case any processing error happened - response would be returned as-is, without any filtering applied. 
+2. else, if user provides `X-client-id` header with a value we have filters for (e.g. `our-mobile-app`) - client-specific filter is applied.
+3. else - default client filter file will be used (since we have it in this example).
+4. in case we didn't have nor header value neither any of filter files present for this endpoint, or in case any processing error happened - response would be returned as-is, without any filtering applied. 
 
 ## How to plug Jsonsiever lib into any (Java 17) application 
-Without Spring lib would just require `Jackson` and `Slf4j` dependencies added to your application and thats it - `JsonFilteringService` will be usable directly from your code.  
+Without SpringBoot, lib would just require `Jackson` and `Slf4j` dependencies added explicitly to your application and that's it - `JsonFilteringService` will be usable directly from your code.  
 
 Example Gradle dependencies:
 ```
@@ -152,11 +153,10 @@ JsonFilteringService filteringService = new JsonFilteringService(objectMapper.ge
 String jsonData = "{\"field1\": 123, \"obj\": {\"f1\": 123, \"f2\": 456}}";
 JsonNode filterPattern = objectMapper.readTree("{\"obj\": {\"f1\": 123}}");
 
-System.out.println(
-    new String(filteringService.filterJsonFields(jsonData.getBytes(), filterPattern))
+byte[] filteredJson = filteringService.filterJsonFields(jsonData.getBytes(), filterPattern);
 );
 ```
 
 ## How to use Jsonsiever with any Java 8+ application
-You could just take source for whole `jsonsiever.core` package (just a few classes besides `JsonFilteringService`) and compile it with Java 8, adding some version of Jackson and Slf4 as dependency.
+You could just manually take a source for whole `jsonsiever.core` package (just a few classes besides `JsonFilteringService`) and compile it with Java 8, adding some version of Jackson and Slf4 as dependency.  
 Then use `JsonFilteringService` the same way as in [How to plug Jsonsiever lib into any (Java 17) application](#How-to-plug-Jsonsiever-lib-into-any-(Java-17)-application)
