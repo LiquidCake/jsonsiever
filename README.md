@@ -133,6 +133,18 @@ After making above configuration - requests to configured endpoints will be filt
 3. else - default client filter file will be used (since we have it in this example).
 4. in case we didn't have nor header value neither any of filter files present for this endpoint, or in case any processing error happened - response would be returned as-is, without any filtering applied. 
 
+Example CURL requests (with both headers enabled):
+```
+curl --location '127.0.0.1:8080/get-cats' \
+--header 'x-client-id: our-mobile-app' \
+--header 'X-json-filter-pattern: [{"name": 1}]'
+
+curl --location --request POST '127.0.0.1:8080/activate-cat/orange?fakeParam=blabla' \
+--header 'x-client-id: our-mobile-app' \
+--header 'X-json-filter-pattern: {"name": 1}'
+
+```
+
 ## How to plug Jsonsiever lib into any (Java 17) application 
 Without SpringBoot, lib would just require `Jackson` and `Slf4j` dependencies added explicitly to your application and that's it - `JsonFilteringService` will be usable directly from your code.  
 
