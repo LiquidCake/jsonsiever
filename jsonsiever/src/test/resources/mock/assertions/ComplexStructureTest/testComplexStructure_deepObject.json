@@ -1,0 +1,68 @@
+{
+  "fString": "somestriiing",
+  "fObject2": {
+    "fObject": {
+      "fObject": {
+        "fObject": {
+          "fObject": {
+            "fObject": {
+              "fObject": {
+                "fObject": {
+                  "fObject": {
+                    "fObject": {
+                      "fObject": {
+                        "fObject": {
+                          "fObject": {
+                            "fObject": {
+                              "fString": "somestriiing",
+                              "fObject": {
+                                "fObject": {
+                                  "fObject": {
+                                    "fObject": {
+                                      "fObject": {
+                                        "fObject": {
+                                          "fObject": {
+                                            "fObject": {
+                                              "fObject": {
+                                                "fObject": {
+                                                  "fObject": {
+                                                    "fObject": {
+                                                      "fObject": {
+                                                        "fObject": {
+                                                          "fObject": {
+                                                            "fObject": {
+                                                              "fArray1": [
+                                                                1,
+                                                                2
+                                                              ]
+                                                            }
+                                                          }
+                                                        }
+                                                      }
+                                                    }
+                                                  }
+                                                }
+                                              }
+                                            }
+                                          }
+                                        }
+                                      }
+                                    }
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,17 @@
+{
+  "fString": 1,
+  "fBool": 1,
+  "fNull": 1,
+  "fObject": {},
+  "fString2": 1,
+  "fArray": [
+    {
+      "fString": 1,
+      "fObject": {
+        "fInt": 1,
+        "fArrayXDemObjects": [],
+        "fArrayXDemPrimitives": []
+      }
+    }
+  ]
+}

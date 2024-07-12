@@ -1,0 +1,77 @@
+{
+  "fString": "somestriiing",
+  "fBool": true,
+  "fNull": null,
+  "fObject": {
+    "fString": "somestriiing",
+    "fInt": 444123,
+    "fObject": {
+      "fInt": 111,
+      "fFloat1": 135.9999678,
+      "fFloat2": 2.222222222E9,
+      "fArray": [
+        "somestriiing",
+        "somestriiing",
+        null
+      ]
+    }
+  },
+  "fString2": "somestriiing2",
+  "fArray": [
+    {
+      "fString": "somestriiing",
+      "fObject": {
+        "fInt": 55,
+        "fArrayXDemObjects": [
+          [
+            {
+              "fInt": 111,
+              "fArray": [
+                222,
+                null
+              ],
+              "fArray2": [
+                {
+                  "fBool": true,
+                  "fInt": 111
+                },
+                {
+                  "fBool": false
+                }
+              ]
+            },
+            {
+              "fInt": 444,
+              "fArray": [
+                555,
+                666
+              ],
+              "fArray2": [
+                {
+                  "fBool": true,
+                  "fInt": 111
+                },
+                null
+              ]
+            },
+            null
+          ]
+        ],
+        "fArrayXDemPrimitives": [
+          [
+            [
+              1,
+              2
+            ]
+          ],
+          [
+            [
+              3,
+              4
+            ]
+          ]
+        ]
+      }
+    }
+  ]
+}

@@ -1,0 +1,59 @@
+{
+  "fString": "somestriiing",
+  "fFloat": 135.9999678,
+  "fNull": null,
+  "fObject": {
+    "fString": "somestriiing",
+    "fObject": {
+      "fInt": 111,
+      "fFloat2": 2.222222222E9
+    }
+  },
+  "fString2": "somestriiing2",
+  "fArray": [
+    {
+      "fString": "somestriiing",
+      "fObject": {
+        "fInt": 55,
+        "fArrayXDemObjects": [
+          [
+            {
+              "fInt": 111,
+              "fArray2": [
+                {
+                  "fInt": 111
+                },
+                {}
+              ]
+            },
+            {
+              "fInt": 444,
+              "fArray2": [
+                {
+                  "fInt": 111
+                },
+                null
+              ]
+            },
+            null
+          ]
+        ],
+        "fArrayXDemPrimitives": [
+          [
+            [
+              1,
+              2
+            ]
+          ],
+          [
+            [
+              3,
+              4
+            ]
+          ]
+        ]
+      }
+    }
+  ],
+  "fString3": "somestriiing3"
+}

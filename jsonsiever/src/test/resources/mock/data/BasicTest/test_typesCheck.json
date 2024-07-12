@@ -1,0 +1,11 @@
+{
+  "fObject": {
+    "fObject2": {
+      "fString": "somestriiing"
+    },
+    "fArray": [
+      1,
+      2
+    ]
+  }
+}

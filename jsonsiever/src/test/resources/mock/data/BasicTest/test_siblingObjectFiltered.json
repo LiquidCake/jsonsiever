@@ -1,0 +1,11 @@
+{
+  "fString": "somestriiing",
+  "fObject": {
+    "fString2": "somestriiing2",
+    "fInt": 55
+  },
+  "fObject2": {
+    "fString3": "somestriiing3",
+    "fInt": 66
+  }
+}

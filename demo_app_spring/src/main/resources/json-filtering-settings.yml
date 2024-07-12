@@ -1,0 +1,17 @@
+filterHeaderName: "X-json-filter-pattern"
+clientIdHeaderName: "X-client-id"
+endpoints:
+  - path: "GET_/get-cats"
+    regexpPath: false
+    headerPatternAllowed: true
+    filePatternAllowed: true
+    filePatternPathPerClient:
+      our-mobile-app: "/json-filters/GET_get-cats/our-mobile-app.json"
+      default: "/json-filters/GET_get-cats/default.json"
+  - path: "POST_/activate-cat/.+"
+    regexpPath: true
+    headerPatternAllowed: true
+    filePatternAllowed: true
+    filePatternPathPerClient:
+      our-mobile-app: "/json-filters/POST_activate-cat/our-mobile-app.json"
+      default: "/json-filters/POST_activate-cat/default.json"

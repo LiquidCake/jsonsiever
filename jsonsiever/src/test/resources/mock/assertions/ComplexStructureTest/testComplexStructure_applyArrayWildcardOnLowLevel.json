@@ -1,0 +1,68 @@
+{
+  "fNull": null,
+  "fObject": {
+    "fObject": {
+      "fInt": 111,
+      "fArray": [
+        "somestriiing",
+        "somestriiing",
+        null
+      ]
+    }
+  },
+  "fArray": [
+    {
+      "fObject": {
+        "fArrayXDemObjects": [
+          [
+            {
+              "fInt": 111,
+              "fArray": [
+                222,
+                null
+              ],
+              "fArray2": [
+                {
+                  "fBool": true,
+                  "fInt": 111
+                },
+                {
+                  "fBool": false
+                }
+              ]
+            },
+            {
+              "fInt": 444,
+              "fArray": [
+                555,
+                666
+              ],
+              "fArray2": [
+                {
+                  "fBool": true,
+                  "fInt": 111
+                },
+                null
+              ]
+            },
+            null
+          ]
+        ],
+        "fArrayXDemPrimitives": [
+          [
+            [
+              1,
+              2
+            ]
+          ],
+          [
+            [
+              3,
+              4
+            ]
+          ]
+        ]
+      }
+    }
+  ]
+}
