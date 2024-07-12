@@ -40,7 +40,7 @@ It supports setting different filters per-clientId for the same endpoint and usa
 Of course, filtering a complete json response is not as resource-efficient as just not serializing unwanted fields at the first place, but Jsonsiever is based on fast Jackson Streaming API and resource usage drawback should be generally acceptable.  
 
 Lib is ready to use by just plugging it into SpringBoot 3.X / Java 17 application. Also, its code might be relatively easily adapted to SpringBoot 2.X / Java 8 or plain Spring / Java Servlet app.  
-It is also possible to plug the lib into plain Java 17 application and use it for manual json filtering (see below [How to plug Jsonsiever lib into any (Java 17) application](#How-to-plug-Jsonsiever-lib-into-any-(Java-17)-application)). In this case one would just use core `JsonFilteringService` class to filter json in other scenarios, besides processing REST responses. This class (as well as whole `jsonsiever.core` package it is part of) is ready to be compiled with Java 8.
+It is also possible to plug the lib into plain Java 17 application and use it for manual json filtering (see below [How to use Jsonsiever lib with plain Java application](#How-to-use-Jsonsiever-lib-with-plain-Java-application)). In this case one would just use core `JsonFilteringService` class to filter json in other scenarios, besides processing REST responses. This class (as well as whole `jsonsiever.core` package it is part of) is ready to be compiled with Java 8.
 
 ## How to plug Jsonsiever lib into SpringBoot 3.X application
 There is a simple demo SpringBoot application inside this repository - feel free to build it and play around - `jsonsiever/demo_app_spring`  
@@ -145,7 +145,8 @@ curl --location --request POST '127.0.0.1:8080/activate-cat/orange?fakeParam=bla
 
 ```
 
-## How to plug Jsonsiever lib into any (Java 17) application 
+## How to use Jsonsiever lib with plain Java application
+### Java 17
 Without SpringBoot, lib would just require `Jackson` and `Slf4j` dependencies added explicitly to your application and that's it - `JsonFilteringService` will be usable directly from your code.  
 
 Example Gradle dependencies:
@@ -169,6 +170,7 @@ byte[] filteredJson = filteringService.filterJsonFields(jsonData.getBytes(), fil
 );
 ```
 
-## How to use Jsonsiever with any Java 8+ application
+### Java 8+
+Lib is compiled with Java 17 but core sources are Java 8 compatible.  
 You could just manually take a source for whole `jsonsiever.core` package (just a few classes besides `JsonFilteringService`) and compile it with Java 8, adding some version of Jackson and Slf4 as dependency.  
-Then use `JsonFilteringService` the same way as in [How to plug Jsonsiever lib into any (Java 17) application](#How-to-plug-Jsonsiever-lib-into-any-(Java-17)-application)
+Then use `JsonFilteringService` the same way as in [Java 17](#Java-17)
