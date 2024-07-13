@@ -27,7 +27,7 @@ Removing `name` while keeping `stats` object intact will look like this:
   "stats": {}
 }
 ```
-(more examples in javadoc of `JsonFilteringService`)
+(more examples in javadoc of [JsonFilteringService](https://www.javadoc.io/doc/io.github.liquidcake/jsonsiever/latest/io/github/liquidcake/jsonsiever/core/JsonFilteringService.html))
 
 ## Main use-case:
 Let's assume we have a Spring REST API with some heavy endpoint, and we want to remove particular deeply-nested fields from the response, to make it lighter and more easily parsable for clients.
@@ -96,7 +96,7 @@ public class AppConfig {
 ```
 
 #### Step 3: create filtering settings file
-Create file `json-filtering-settings.yml` inside classpath (e.g. `resources` folder) and configure your endpoints (details in javadoc for `JsonFilteringSettings`)  
+Create file `json-filtering-settings.yml` inside classpath (e.g. `resources` folder) and configure your endpoints (details in javadoc for [JsonFilteringSettings](https://www.javadoc.io/doc/io.github.liquidcake/jsonsiever/latest/io/github/liquidcake/jsonsiever/web/config/JsonFilteringSettings.html))  
 Example from `demo_app_spring`:
 ```
 filterHeaderName: "X-json-filter-pattern"
