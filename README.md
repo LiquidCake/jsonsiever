@@ -45,7 +45,21 @@ It is also possible to plug the lib into plain Java 17 application and use it fo
 ## How to plug Jsonsiever lib into SpringBoot 3.X application
 There is a simple demo SpringBoot application inside this repository - feel free to build it and play around - `jsonsiever/demo_app_spring`  
 
-#### Step 1: Adjust your Spring configuration
+#### Step 1: Add dependency:
+Maven:
+```
+<dependency>
+    <groupId>io.github.liquidcake</groupId>
+    <artifactId>jsonsiever</artifactId>
+    <version>1.0.0</version>
+</dependency>
+```
+Gradle:
+```
+implementation 'io.github.liquidcake:jsonsiever:1.0.0'
+```
+
+#### Step 2: Adjust your Spring configuration
 ```
 @Configuration
 @Import(JsonFilteringConfig.class)               //JSONSIEVER - import Jsonsiever config
@@ -77,7 +91,7 @@ public class AppConfig {
 }
 ```
 
-#### Step 2: create filtering settings file
+#### Step 3: create filtering settings file
 Create file `json-filtering-settings.yml` inside classpath (e.g. `resources` folder) and configure your endpoints (details in javadoc for `JsonFilteringSettings`)  
 Example from `demo_app_spring`:
 ```
@@ -100,7 +114,7 @@ endpoints:
       default: "/json-filters/POST_activate-cat/default.json"
 ```
 
-#### Step 3: add filter files for your endpoints (if you are going to use file-based filters)
+#### Step 4: add filter files for your endpoints (if you are going to use file-based filters)
 Create dir `json-filters` inside classpath (e.g. `resources` folder) and inside it - directories for each configured endpoint.  
 Inside each per-endpoint directory you may have 1 or more per-client filter files.  
 E.g. in above example config - we have 2 endpoints, each with default filter and with separate filter for client-id `our-mobile-app` which can be passed by client in HTTP header.  
