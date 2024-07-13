@@ -42,6 +42,10 @@ Of course, filtering a complete json response is not as resource-efficient as ju
 Lib is ready to use by just plugging it into SpringBoot 3.X / Java 17 application. Also, its code might be relatively easily adapted to SpringBoot 2.X / Java 8 or plain Spring / Java Servlet app.  
 It is also possible to plug the lib into plain Java 17 application and use it for manual json filtering (see below [How to use Jsonsiever lib with plain Java application](#How-to-use-Jsonsiever-lib-with-plain-Java-application)). In this case one would just use core `JsonFilteringService` class to filter json in other scenarios, besides processing REST responses. This class (as well as whole `io.github.liquidcake.jsonsiever.core` package it is part of) is ready to be compiled with Java 8.
 
+## Documentation
+Details on filters structure are in javadoc for [JsonFilteringService](https://www.javadoc.io/doc/io.github.liquidcake/jsonsiever/latest/io/github/liquidcake/jsonsiever/core/JsonFilteringService.html) class  
+Details on settings file are in javadoc for [JsonFilteringSettings](https://www.javadoc.io/doc/io.github.liquidcake/jsonsiever/latest/io/github/liquidcake/jsonsiever/web/config/JsonFilteringSettings.html) class  
+
 ## How to plug Jsonsiever lib into SpringBoot 3.X application
 There is a simple demo SpringBoot application inside this repository - feel free to build it and play around - `jsonsiever/demo_app_spring`  
 
