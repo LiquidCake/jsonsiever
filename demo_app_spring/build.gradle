@@ -18,9 +18,9 @@ repositories {
 }
 
 dependencies {
-    implementation 'org.springframework.boot:spring-boot-starter-web'
+    implementation 'io.github.liquidcake:jsonsiever:1.0.0'
 
-    implementation files('libs/jsonsiever-1.0.0.jar')
+    implementation 'org.springframework.boot:spring-boot-starter-web'
 }
 
 tasks.named('test') {

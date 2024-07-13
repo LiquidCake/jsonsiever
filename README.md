@@ -152,7 +152,7 @@ Without SpringBoot, lib would just require `Jackson` and `Slf4j` dependencies ad
 Example Gradle dependencies:
 ```
 dependencies {
-    implementation files('libs/jsonsiever-0.1.0.jar')
+    implementation 'io.github.liquidcake:jsonsiever:1.0.0'
  
     implementation 'com.fasterxml.jackson.core:jackson-databind:2.17.1'
     implementation 'org.slf4j:slf4j-api:1.7.25'
