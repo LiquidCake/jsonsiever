@@ -181,7 +181,6 @@ String jsonData = "{\"field1\": 123, \"obj\": {\"f1\": 123, \"f2\": 456}}";
 JsonNode filterPattern = objectMapper.readTree("{\"obj\": {\"f1\": 123}}");
 
 byte[] filteredJson = filteringService.filterJsonFields(jsonData.getBytes(), filterPattern);
-);
 ```
 
 ### Java 8+
