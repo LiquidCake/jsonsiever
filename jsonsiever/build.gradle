@@ -71,6 +71,7 @@ publishing {
                     developer {
                         id = 'liquidcake'
                         name = 'Arseniy'
+                        url = 'https://github.com/liquidcake/'
                     }
                 }
                 scm {
@@ -90,19 +91,17 @@ publishing {
 }
 
 jreleaser {
+    gitRootSearch = true
     signing {
         active = 'ALWAYS'
         armored = true
     }
     deploy {
         maven {
-            nexus2 {
-                'maven-central' {
+            mavenCentral {
+                sonatype {
                     active = 'ALWAYS'
-                    url = 'https://s01.oss.sonatype.org/service/local'
-                    snapshotUrl = 'https://s01.oss.sonatype.org/content/repositories/snapshots/'
-                    closeRepository = true
-                    releaseRepository = false
+                    url = 'https://central.sonatype.com/api/v1/publisher'
                     stagingRepository('build/staging-deploy')
                 }
             }
