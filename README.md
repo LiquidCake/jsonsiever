@@ -12,7 +12,7 @@ E.g. we have following json and want to remove `stats.agi` field:
   }
 }
 ```
-Then filter would be like this:
+Then filter would look like this:
 ```
 {
   "name": 1,
@@ -21,7 +21,7 @@ Then filter would be like this:
   }
 }
 ```
-Removing `name` while keeping `stats` object intact will look like this:
+Filter that removes `name` field while keeping `stats` object intact would look like this:
 ```
 {
   "stats": {}
