@@ -133,7 +133,7 @@ json-filters/
     our-mobile-app.json
 ```
 
-Content of filter files is WYSIWYG json filtering pattern (mask). All details on filter pattern composition are available inside javadoc for `JsonFilteringService`.  
+Content of filter files is WYSIWYG json filtering pattern (mask). All details on filter pattern composition are available inside javadoc for [JsonFilteringService](https://www.javadoc.io/doc/io.github.liquidcake/jsonsiever/latest/io/github/liquidcake/jsonsiever/core/JsonFilteringService.html) class.  
 Simple example from `demo_app_spring` file `demo_app_spring/src/main/resources/json-filters/POST_activate-cat/our-mobile-app.json`:
 ```
 {
